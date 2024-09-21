@@ -40,7 +40,7 @@ function App() {
 
     // Check if the email is valid
     if (!formData.email.includes('@')) {
-      tempErrors.email = 'Invalid Email address';
+      tempErrors.email = 'Invalid Email address'
     }
 
     setErrors(tempErrors);
@@ -55,7 +55,7 @@ function App() {
       console.log('Form submitted successfully')
       console.log(formData)
     } else {
-      console.log('Form has errors');
+      console.log('Form has some errors');
     }
   };
 
