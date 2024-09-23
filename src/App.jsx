@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import FormField from './FormField'
+import { array } from 'prop-types';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -12,16 +13,16 @@ function App() {
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setFormData({
       ...formData,
       [name]: value,
-    });
-  };
+    })
+  }
 
   // Validation function to check if the form is valid
   const validate = () => {
-    let tempErrors = {};
+    let tempErrors = {}
 
     // Check if the first name is empty
     if ((!typeof formData.firstName === "string")) {
@@ -48,16 +49,19 @@ function App() {
     return Object.keys(tempErrors).length === 0; // Return true if no errors
   };
 
+  const [submittedData, setSubmittedData] = useState(null)
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (validate()) {
       console.log('Form submitted successfully')
       console.log(formData)
+      setSubmittedData(formData)
     } else {
       console.log('Form has some errors');
     }
-  };
+  }
 
   return (
     <>
@@ -93,6 +97,16 @@ function App() {
         <br />
         <button type="submit">Submit</button>
       </form>
+      <div>
+      {/* Display submitted data */}
+      {submittedData && (
+        <div>
+          <p><strong>First Name:</strong> {submittedData.firstName}</p>
+          <p><strong>Email:</strong> {submittedData.email}</p>
+          <p><strong>Date of Birth:</strong> {submittedData.dob}</p>
+        </div>
+      )}
+      </div>
     </>
   );
 }
